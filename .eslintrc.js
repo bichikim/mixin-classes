@@ -54,6 +54,7 @@ module.exports = {
     {
       files: ['*.d.ts'],
       rules: {
+        'no-var': 'off',
         'import/no-duplicates': 'off',
         'typescript/interface-name-prefix': 'off',
         'typescript/no-namespace': 'off',
