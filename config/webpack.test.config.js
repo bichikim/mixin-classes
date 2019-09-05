@@ -1,10 +1,9 @@
-const WebpackBaseConfig = require('./webpack.base.config')
+const webpackBaseConfig = require('./webpack.base.config')
 const webpackMerge = require('webpack-merge')
 const Webpack = require('webpack')
-//  karma test won't ues entry
-process.env.NODE_ENV = 'test'
-WebpackBaseConfig.entry = null
-module.exports = webpackMerge(WebpackBaseConfig, {
+module.exports = webpackMerge(webpackBaseConfig({mode: 'test'}), {
+  entry: null,
+  output: null,
   /**
    * Test in this project needs development
    * For more info See this
@@ -13,24 +12,6 @@ module.exports = webpackMerge(WebpackBaseConfig, {
   mode: 'development',
   // for webpack karma debug
   devtool: 'inline-source-map',
-  module: {
-    rules: [
-      {
-        test: /\.js$|\.ts$/,
-        use: {
-          // for karma coverage
-          loader: 'istanbul-instrumenter-loader',
-          options: {esModules: true},
-        },
-        enforce: 'post',
-        exclude: [
-          /node_modules/,
-          /\.spec\.(js|ts)$/,
-          /config/,
-        ],
-      },
-    ],
-  },
   plugins: [
     new Webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify('test'),
