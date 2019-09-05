@@ -31,6 +31,7 @@ module.exports = {
       files: ['*.js'],
       rules: {
         'indent': 'off',
+        '@typescript-eslint/no-var-requires': 'off',
       },
     },
     {
@@ -56,8 +57,6 @@ module.exports = {
       rules: {
         'no-var': 'off',
         'import/no-duplicates': 'off',
-        'typescript/interface-name-prefix': 'off',
-        'typescript/no-namespace': 'off',
         'no-magic-numbers': 'off',
       },
     },
