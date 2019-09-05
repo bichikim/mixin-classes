@@ -1,5 +1,5 @@
 module.exports = {
-  plugins: ['html', '@typescript-eslint', 'import', 'vue'],
+  plugins: ['@typescript-eslint', 'import', 'vue'],
   env: {
     'commonjs': true,
     'browser': true,
@@ -14,9 +14,11 @@ module.exports = {
     },
   },
   extends: [
+    'plugin:@typescript-eslint/recommended',
     'eslint:recommended',
     'plugin:vue/recommended',
     'plugin:import/warnings',
+
   ],
   parserOptions: {
     parser: '@typescript-eslint/parser',
@@ -217,25 +219,25 @@ module.exports = {
      * type script options
      *************************************/
     // off
-    '@typescript-eslint/explicit-member-accessibility': 'off',
-    '@typescript-eslint/interface-name-prefix': 'off',
+    // '@typescript-eslint/explicit-member-accessibility': 'off',
+    // '@typescript-eslint/interface-name-prefix': 'off',
     '@typescript-eslint/member-delimiter-style': 'off',
-    '@typescript-eslint/member-ordering': 'off',
+    // '@typescript-eslint/member-ordering': 'off',
     '@typescript-eslint/no-empty-interface': 'off',
-    '@typescript-eslint/no-explicit-any': 'off',
-    '@typescript-eslint/no-type-alias': 'off',
-    '@typescript-eslint/no-use-before-define ': 'off',
+    // '@typescript-eslint/no-explicit-any': 'off',
+    // '@typescript-eslint/no-type-alias': 'off',
+    '@typescript-eslint/camelcase': 'off',
+    '@typescript-eslint/explicit-function-return-type': 'off',
+    '@typescript-eslint/ban-ts-ignore': 'off',
+    '@typescript-eslint/no-use-before-define': 'off',
+    '@typescript-eslint/no-inferrable-types': 'off',
     // on
     '@typescript-eslint/adjacent-overload-signatures': 'error',
     '@typescript-eslint/class-name-casing': 'error',
     '@typescript-eslint/member-naming': ['error', {'private': '^_'}],
-    '@typescript-eslint/no-angle-bracket-type-assertion': 'error',
     '@typescript-eslint/no-array-constructor': 'error',
     '@typescript-eslint/no-namespace': 'error',
     '@typescript-eslint/no-parameter-properties': 'error',
-    '@typescript-eslint/no-triple-slash-reference': 'error',
-    // it has an error
-    '@typescript-eslint/no-unused-vars': 'warn',
     '@typescript-eslint/type-annotation-spacing': [
       'error', {
         'before': false,
