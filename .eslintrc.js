@@ -1,5 +1,5 @@
 module.exports = {
-  plugins: ['@typescript-eslint', 'import', 'vue'],
+  plugins: ['@typescript-eslint', 'import', 'vue', 'sort-class-members'],
   env: {
     'commonjs': true,
     'browser': true,
@@ -10,7 +10,7 @@ module.exports = {
   },
   settings: {
     'import/parsers': {
-      '@typescript-eslint/parser': [ '.ts', '.tsx', 'vue'],
+      '@typescript-eslint/parser': ['.ts', '.tsx', 'vue'],
     },
   },
   extends: [
@@ -18,7 +18,6 @@ module.exports = {
     'eslint:recommended',
     'plugin:vue/recommended',
     'plugin:import/warnings',
-
   ],
   parserOptions: {
     parser: '@typescript-eslint/parser',
@@ -31,7 +30,6 @@ module.exports = {
       files: ['*.js'],
       rules: {
         'indent': 'off',
-        '@typescript-eslint/no-var-requires': 'off',
       },
     },
     {
@@ -57,6 +55,8 @@ module.exports = {
       rules: {
         'no-var': 'off',
         'import/no-duplicates': 'off',
+        'typescript/interface-name-prefix': 'off',
+        'typescript/no-namespace': 'off',
         'no-magic-numbers': 'off',
       },
     },
@@ -116,28 +116,29 @@ module.exports = {
     'getter-return': 'error',
     'global-require': 'error',
     'guard-for-in': 'error',
-    'indent': ['error', 2, { 'SwitchCase': 1 }],
-    'keyword-spacing': ['error', {
-      'before': true,
-      'after': true,
-      'overrides': {
-        'catch': {
-          'after': false,
+    'indent': ['error', 2, {'SwitchCase': 1}],
+    'keyword-spacing': [
+      'error', {
+        'before': true,
+        'after': true,
+        'overrides': {
+          'catch': {
+            'after': false,
+          },
+          'if': {
+            'after': false,
+          },
+          'for': {
+            'after': false,
+          },
+          'while': {
+            'after': false,
+          },
+          'switch': {
+            'after': false,
+          },
         },
-        'if': {
-          'after': false,
-        },
-        'for': {
-          'after': false,
-        },
-        'while': {
-          'after': false,
-        },
-        'switch': {
-          'after': false,
-        }
-      }
-    }],
+      }],
     'max-depth': ['error', {'max': 4}],
     'max-len': ['error', 100],
     'max-lines': ['error', 1000],
@@ -209,10 +210,14 @@ module.exports = {
     'require-await': 'error',
     'semi': ['error', 'never'],
     'sort-keys': 'off',
-    'space-before-blocks': ['error', {
-      'functions': 'always', 'keywords': 'always', 'classes': 'always'}],
-    'space-before-function-paren': ['error', {
-      'anonymous': 'always', 'named': 'never', 'asyncArrow': 'always'}],
+    'space-before-blocks': [
+      'error', {
+        'functions': 'always', 'keywords': 'always', 'classes': 'always',
+      }],
+    'space-before-function-paren': [
+      'error', {
+        'anonymous': 'always', 'named': 'never', 'asyncArrow': 'always',
+      }],
     'vars-on-top': 'error',
 
     /*************************************
@@ -231,6 +236,7 @@ module.exports = {
     '@typescript-eslint/ban-ts-ignore': 'off',
     '@typescript-eslint/no-use-before-define': 'off',
     '@typescript-eslint/no-inferrable-types': 'off',
+    '@typescript-eslint/no-explicit-any': 'off',
     // on
     '@typescript-eslint/adjacent-overload-signatures': 'error',
     '@typescript-eslint/class-name-casing': 'error',
@@ -253,5 +259,20 @@ module.exports = {
           },
         },
       }],
+    /***********************************
+     * sort class members
+     ***********************************/
+    'sort-class-members/sort-class-members': ['error', {
+      order: [
+        '[static-properties]',
+        '[static-methods]',
+        '[properties]',
+        '[private-properties]',
+        'constructor',
+        '[methods]',
+        '[private-methods]',
+      ],
+      accessorPairPositioning: 'getThenSet',
+    }]
   },
 }
