@@ -1,4 +1,6 @@
 import {Mixin, getMixin} from '@/index'
+import {MaxLength, validateOrReject} from 'class-validator'
+
 
 describe('MixIn', function test() {
   it('should mixin', function test() {

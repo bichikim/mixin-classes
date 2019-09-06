@@ -2,10 +2,6 @@ const webpackBaseConfig = require('./webpack.base.config')
 const webpackMerge = require('webpack-merge')
 const Webpack = require('webpack')
 const packageJson = require('../package.json')
-const externals = () => {
-  const {dependencies} = packageJson
-  return Object.keys(dependencies)
-}
 module.exports = webpackMerge(webpackBaseConfig({mode: 'bundle'}), {
   /**
    * Test in this project needs development
@@ -20,5 +16,4 @@ module.exports = webpackMerge(webpackBaseConfig({mode: 'bundle'}), {
       'process.env.NODE_ENV': JSON.stringify('production'),
     }),
   ],
-  externals: [...externals()],
 })

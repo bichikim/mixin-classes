@@ -46,7 +46,6 @@ export const getMixin = (myClass: any, name: string): any => {
   return new Proxy({}, {
     get(target, prop) {
       const mixin = myClass[mixinKey]
-      console.log('mixin', mixin)
       if(mixin === null || mixin === undefined) {
         return undefined
       }

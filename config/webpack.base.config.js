@@ -7,6 +7,7 @@ const resolve = (dir) => {
   return path.join(__dirname, '..', dir)
 }
 const tsTranspileOnly = process.env.TS_TRANSPILE_ONLY === 'true'
+const packageJson = require('../package.json')
 module.exports = ({mode = 'bundle'} = {}) => {
   const tsConfigFile = process.env.TS_CONFIG_FILE || `tsconfig.${mode}.json`
   return {
@@ -17,6 +18,9 @@ module.exports = ({mode = 'bundle'} = {}) => {
       path: resolve('dist/bundle'),
       filename: '[name].js',
       pathinfo: true,
+      library: packageJson.name,
+      libraryTarget: 'umd',
+      globalObject: 'this',
     },
     resolve: {
       extensions: [
