@@ -37,13 +37,13 @@ export function Mixin(...classes: any): any {
   let target: any = first
 
   _classes.forEach((classOne: any) => {
-    target = mix(target, classOne)
+    target = _mix(target, classOne)
   })
   return target
 }
 
-type AnyClass<A = any> = new (...args: any) => A
-const mixinSymbol = Symbol('mixin')
+export type AnyClass<A = any> = new (...args: any) => A
+export const mixinSymbol = Symbol('mixin')
 
 export const getMixin = (myClass: any, name: string): any => {
   return new Proxy({}, {
@@ -70,7 +70,7 @@ export const getMixin = (myClass: any, name: string): any => {
  * @param Source
  * @param Base
  */
-const mix = (
+const _mix = (
   Source: any,
   Base: any,
 ): any => {
