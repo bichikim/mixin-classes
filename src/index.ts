@@ -1,4 +1,7 @@
+/* eslint-disable no-proto */
+
 /* tslint:disable:ban-types variable-name */
+
 export function Mixin<A>(classA: AnyClass<A>): AnyClass<A>
 export function Mixin<A, B>(classA: AnyClass<A>, classB: AnyClass<B>): AnyClass<A & B>
 export function Mixin<A, B, C>(
@@ -40,12 +43,12 @@ export function Mixin(...classes: any): any {
 }
 
 type AnyClass<A = any> = new (...args: any) => A
-const mixinKey = Symbol('mixin')
+const mixinSymbol = Symbol('mixin')
 
 export const getMixin = (myClass: any, name: string): any => {
   return new Proxy({}, {
     get(target, prop) {
-      const mixin = myClass[mixinKey]
+      const mixin = myClass[mixinSymbol]
       if(mixin === null || mixin === undefined) {
         return undefined
       }
@@ -71,43 +74,27 @@ const mix = (
   Source: any,
   Base: any,
 ): any => {
+
+
   class Mixed {
     constructor(...args: any[]) {
-      const source = new Source(...args)
-      const base = new Base(...args)
+      const source = new Source.prototype.constructor(...args)
+      const base = new Base.prototype.constructor(...args)
       Object.assign(this, source)
       Object.assign(this, base)
+      Object.setPrototypeOf(Object.getPrototypeOf(this), {
+        [mixinSymbol]: {
+          [Source.name]: Object.getPrototypeOf(source),
+          [Base.name]: Object.getPrototypeOf(base),
+        },
+        __proto__: {
+          ...Object.getPrototypeOf(base),
+          __proto__: Object.getPrototypeOf(source),
+        },
+      })
     }
   }
 
-  // @ts-ignore
-  Mixed.prototype[mixinKey] = {
-    [Source.name]: Source.prototype,
-    [Base.name]: Base.prototype,
-  }
-
-  registerProtoType(Mixed.prototype, Source.prototype)
-  registerProtoType(Mixed.prototype, Base.prototype)
   return Mixed
 }
 
-const registerProtoType = (APrototype, BPrototype) => {
-  for(const propName of Object.getOwnPropertyNames(BPrototype)) {
-    if(propName === 'constructor') {
-      continue
-    }
-    const descriptor = Object.getOwnPropertyDescriptor(BPrototype, propName)
-
-    if(!descriptor) {
-      continue
-    }
-    Object.defineProperty(APrototype, propName, descriptor)
-  }
-
-  if(BPrototype[Symbol.iterator]) {
-    const descriptor = Object.getOwnPropertyDescriptor(BPrototype, Symbol.iterator)
-    if(descriptor) {
-      Object.defineProperty(APrototype, Symbol.iterator, descriptor)
-    }
-  }
-}
