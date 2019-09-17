@@ -58,6 +58,8 @@ class Root extends Mixin(Foo, Bar, John) {}
 
 ```typescript
 import {MaxLength, validateOrReject} from 'class-validator'
+import {Mixin} from './src/index'
+
 class Foo {
   @MaxLength(3)
   foo: string = ''
