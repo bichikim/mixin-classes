@@ -1,0 +1,13 @@
+export declare function Mixin<A>(classA: AnyClass<A>): AnyClass<A>;
+export declare function Mixin<A, B>(classA: AnyClass<A>, classB: AnyClass<B>): AnyClass<A & B>;
+export declare function Mixin<A, B, C>(classA: AnyClass<A>, classB: AnyClass<B>, classC: AnyClass<C>): AnyClass<A & B & C>;
+export declare function Mixin<A, B, C, D>(classA: AnyClass<A>, classB: AnyClass<B>, classC: AnyClass<C>, classD: AnyClass<D>): AnyClass<A & B & C & D>;
+export declare function Mixin<A, B, C, D, E>(classA: AnyClass<A>, classB: AnyClass<B>, classC: AnyClass<C>, classD: AnyClass<D>, classE: AnyClass<E>): AnyClass<A & B & C & D & E>;
+export declare function Mixin<A, B, C, D, E, F>(classA: AnyClass<A>, classB: AnyClass<B>, classC: AnyClass<C>, classD: AnyClass<D>, classE: AnyClass<E>, classF: AnyClass<F>): AnyClass<A & B & C & D & E & F>;
+export declare function Mixin<A, B, C, D, E, F, G>(classA: AnyClass<A>, classB: AnyClass<B>, classC: AnyClass<C>, classD: AnyClass<D>, classE: AnyClass<E>, classF: AnyClass<F>, classG: AnyClass<G>): AnyClass<A & B & C & D & E & F & G>;
+export declare function Mixin<A, B, C, D, E, F, G, H>(classA: AnyClass<A>, classB: AnyClass<B>, classC: AnyClass<C>, classD: AnyClass<D>, classE: AnyClass<E>, classF: AnyClass<F>, classG: AnyClass<G>, classH: AnyClass<H>): AnyClass<A & B & C & D & E & F & G & H>;
+export declare function Mixin<A, B, C, D, E, F, G, H, I>(classA: AnyClass<A>, classB: AnyClass<B>, classC: AnyClass<C>, classD: AnyClass<D>, classE: AnyClass<E>, classF: AnyClass<F>, classG: AnyClass<G>, classH: AnyClass<H>, classI: AnyClass<I>): AnyClass<A & B & C & D & E & F & G & H & I>;
+export declare function Mixin<T>(...classes: AnyClass[]): T;
+export declare type AnyClass<A = any> = new (...args: any) => A;
+export declare const mixinSymbol: unique symbol;
+export declare const getMixin: (myClass: any, name: string) => any;
