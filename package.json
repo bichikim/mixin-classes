@@ -79,7 +79,7 @@
     "karma-webpack": "^4.0.2",
     "mocha": "^6.1.4",
     "node-mocks-http": "^1.7.6",
-    "pug": "^2.0.4",
+    "pug": "^3.0.1",
     "pug-loader": "^2.4.0",
     "pug-plain-loader": "^1.0.0",
     "regenerator-runtime": "^0.13.3",
